@@ -1,0 +1,44 @@
+window.locales = {"revision":{"download":"Download","revert":"Revert"},"common":{"or":"or","cancel":"Cancel","ok":"OK","got-it":"Got it"},"help":{"title":"Help","contact":{"title":"Contacts","messenger":"Talk to us","github":"Report an issue","email":"Send us email"},"documents":"Documents","yaml-meta":"YAML Metadata","slide":"Slide Example","cheatsheet":"Cheatsheet","example":"Example","syntax":{"h1":"Header","ul":"Unordered List","ol":"Ordered List","todo":"Todo List","blockquote":"Blockquote","b":"Bold font","i":"Italics font","strike":"Strikethrough","ins":"Inserted text","mark":"Marked text","anchor":"Link","img":"Image","code":"Code","embeded":"Externals","alert":"This is a alert area."}},"signin":{"via":"Sign in via {{text}}"},"refresh":{"title":"This page need refresh","incompatible":{"title":"You have an incompatible client version.","content":"Refresh to update."},"upgrade":{"title":"New version available!","note":"See releases notes here","content":"Refresh to enjoy new features."},"auth":{"title":"Your user state has changed.","content":"Refresh to load new user state."},"refresh":"Refresh"},"clipboard":{"title":"Import from clipboard","content":"Paste your markdown or webpage here..."},"locked":{"title":"This note is locked","content":"Sorry, only owner can edit this note."},"limit":{"title":"Reach the limit","content1":"Sorry, you've reached the max length this note can be.","content2":"Please reduce the content or divide it to more notes, thank you!"},"gist-import":{"title":"Import from Gist","content":"Paste your gist url here..."},"snippet-import":{"title":"Import from Snippet","project":{"placeholder":"Select From Available Projects"},"snippet":{"placeholder":"Select From Available Snippets"}},"snippet-export":{"title":"Export to Snippet","visibility":{"placeholder":"Select Visibility Level"},"export":"Export"},"delete":{"title":"Are you sure?","yes":"Yes, do it!"},"header":{"import":{"clipboard":"Clipboard"},"download":{"raw-html":"Raw HTML"},"modes":{"edit":"Edit","both":"Both","view":"View"},"help":"Help","menu":"Menu","intro":"Intro"},"footer":{"tos":"Terms of Service","releases":"Releases","terms":"Terms"},"site":{"meta":{"description":"Best way to write and share your knowledge in markdown.","og":{"title-suffix":"Collaborative Markdown Knowledge Base"}}}};
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    if (jQuery && $.fn.select2) {
+        /**
+ * Select2 Korean translation.
+ * 
+ * @author  Swen Mun <longfinfunnel@gmail.com>
+ */
+(function ($) {
+    "use strict";
+
+    $.fn.select2.locales['ko'] = {
+        formatNoMatches: function () { return "결과 없음"; },
+        formatInputTooShort: function (input, min) { var n = min - input.length; return "너무 짧습니다. "+n+"글자 더 입력해주세요."; },
+        formatInputTooLong: function (input, max) { var n = input.length - max; return "너무 깁니다. "+n+"글자 지워주세요."; },
+        formatSelectionTooBig: function (limit) { return "최대 "+limit+"개까지만 선택하실 수 있습니다."; },
+        formatLoadMore: function (pageNumber) { return "불러오는 중…"; },
+        formatSearching: function () { return "검색 중…"; }
+    };
+
+    $.extend($.fn.select2.defaults, $.fn.select2.locales['ko']);
+})(jQuery);
+
+        // overwrite format functions of already inited select2 instances
+        var st2s = $('.select2-container').toArray();
+        for (var i = 0, l = st2s.length; i < l; i++) {
+            var st2 = st2s[i];
+            var data = $(st2).data('select2');
+            if (!data || !data.opts) continue;
+            var opts = data.opts;
+            opts.formatNoMatches = $.fn.select2.defaults.formatNoMatches;
+            opts.formatInputTooShort = $.fn.select2.defaults.formatInputTooShort;
+            opts.formatInputTooLong = $.fn.select2.defaults.formatInputTooLong;
+            opts.formatSelectionTooBig = $.fn.select2.defaults.formatSelectionTooBig;
+            opts.formatLoadMore = $.fn.select2.defaults.formatLoadMore;
+            opts.formatSearching = $.fn.select2.defaults.formatSearching;
+        }
+    }
+});
+
+
+
